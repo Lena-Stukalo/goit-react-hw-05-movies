@@ -17,10 +17,12 @@ const Movies = () => {
   const location = useLocation();
 
   useEffect(() => {
-    serchByName(query).then(movies => {
-      setMovies(movies.results);
-    });
-  }, []);
+    if (!value && query) {
+      serchByName(query).then(movies => {
+        setMovies(movies.results);
+      });
+    }
+  }, [query, value]);
   const onInputChange = value => {
     setSerchParams(value !== '' ? { query: value } : {});
   };
