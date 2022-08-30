@@ -14,7 +14,7 @@ const NavItem = styled(NavLink)`
 `;
 const NavList = styled.nav`
   display: flex;
-  border-bottom: solid 2px red;
+  border-bottom: solid 2px #f7a372;
 `;
 
 const Navigation = () => {

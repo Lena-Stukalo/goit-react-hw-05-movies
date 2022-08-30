@@ -11,8 +11,15 @@ const NavItem = styled(NavLink)`
   text-align: center;
   color:#fff;
   text-decoration: none;
+  margin-right: 10px
 
   }
+`;
+const List = styled.ul`
+  display: flex;
+  border-bottom: solid 2px #f7a372;
+  list-style: none;
+  padding: 10px;
 `;
 
 const MovieDetails = () => {
@@ -41,8 +48,14 @@ const MovieDetails = () => {
       <p>{overview}</p>
       <h3>Geners</h3>
       <p>{genres.map(genre => genre.name).join(' ')}</p>
-      <NavLink to="cast">Cast</NavLink>
-      <NavLink to="reviews">Reviews</NavLink>
+      <List>
+        <li>
+          <NavItem to="cast">Cast</NavItem>
+        </li>
+        <li>
+          <NavItem to="reviews">Reviews</NavItem>
+        </li>
+      </List>
 
       <Outlet />
     </div>

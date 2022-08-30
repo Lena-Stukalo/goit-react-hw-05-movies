@@ -1,6 +1,15 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getCast } from 'services/APIwork';
+import styled from 'styled-components';
+const List = styled.ul`
+  display: flex;
+  flex
+  border-bottom: solid 2px #f7a372;
+  list-style: none;
+  padding: 10px;
+  flex-wrap: wrap;
+`;
 const Cast = () => {
   const { movieID } = useParams();
   const [cast, setCast] = useState(null);
@@ -13,7 +22,7 @@ const Cast = () => {
     return;
   }
   return (
-    <ul>
+    <List>
       {cast.map(act => {
         return (
           <li key={act.id}>
@@ -28,7 +37,7 @@ const Cast = () => {
           </li>
         );
       })}
-    </ul>
+    </List>
   );
 };
 export default Cast;
