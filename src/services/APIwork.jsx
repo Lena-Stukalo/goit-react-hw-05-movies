@@ -29,3 +29,23 @@ export async function getByID(id) {
     return Promise.reject(new Error(`No results`));
   });
 }
+export async function getCast(id) {
+  return await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=7fea517bd5b294dd7a1b57e94e2c1c68&language=en-US`
+  ).then(res => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(new Error(`No results`));
+  });
+}
+export async function getReviews(id) {
+  return await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=7fea517bd5b294dd7a1b57e94e2c1c68&language=en-US&page=1`
+  ).then(res => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(new Error(`No results`));
+  });
+}

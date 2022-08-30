@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { getTrending } from 'services/APIwork';
 import styled from 'styled-components';
 const NavItem = styled(NavLink)`
@@ -12,6 +12,7 @@ const NavItem = styled(NavLink)`
 
 const Home = () => {
   const [trend, setTrend] = useState([]);
+  const location = useLocation();
   useEffect(() => {
     getTrending().then(movies => {
       setTrend(movies.results);
@@ -26,7 +27,11 @@ const Home = () => {
       <ul>
         {trend.map(movie => {
           return (
-            <NavItem key={movie.id} to={`movies/:${movie.id}`}>
+            <NavItem
+              key={movie.id}
+              to={`movies/${movie.id}`}
+              state={{ from: location }}
+            >
               {movie.title}
             </NavItem>
           );

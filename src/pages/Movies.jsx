@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
 import { serchByName } from 'services/APIwork';
 import styled from 'styled-components';
 const NavItem = styled(NavLink)`
@@ -12,12 +12,24 @@ const NavItem = styled(NavLink)`
 const Movies = () => {
   const [value, setValue] = useState('');
   const [movies, setMovies] = useState('');
-  const onInputChange = event => {
-    setValue(event.target.value);
+  const [serchParams, setSerchParams] = useSearchParams();
+  const query = serchParams.get('query') ?? '';
+  const location = useLocation();
+
+  useEffect(() => {
+    if (query) {
+      serchByName(query).then(movies => {
+        setMovies(movies.results);
+      });
+    }
+  }, []);
+  const onInputChange = value => {
+    setSerchParams(value !== '' ? { query: value } : {});
   };
   const onFormSubmit = e => {
     e.preventDefault();
-    serchByName(value).then(movies => {
+    setSerchParams(value !== '' ? { query: value } : {});
+    serchByName(query).then(movies => {
       setMovies(movies.results);
     });
     setValue('');
@@ -31,9 +43,11 @@ const Movies = () => {
           placeholder="Serch movie"
           autoComplete="off"
           autoFocus
-          required
           value={value}
-          onChange={onInputChange}
+          onChange={e => {
+            setValue(e.target.value);
+            onInputChange(e.target.value);
+          }}
         />
         <button type="sublit">Serch</button>
       </form>
@@ -41,7 +55,11 @@ const Movies = () => {
         {movies
           ? movies.map(movie => {
               return (
-                <NavItem key={movie.id} to={`movies/:${movie.id}`}>
+                <NavItem
+                  key={movie.id}
+                  to={`${movie.id}`}
+                  state={{ from: location }}
+                >
                   {movie.title}
                 </NavItem>
               );
