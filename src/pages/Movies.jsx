@@ -26,7 +26,6 @@ const Movies = () => {
   };
   const onFormSubmit = e => {
     e.preventDefault();
-    setSerchParams(value !== '' ? { query: value } : {});
     serchByName(query).then(movies => {
       setMovies(movies.results);
     });
