@@ -22,7 +22,7 @@ const Movies = () => {
         setMovies(movies.results);
       });
     }
-  }, [query]);
+  }, []);
   const onInputChange = value => {
     setSerchParams(value !== '' ? { query: value } : {});
   };
