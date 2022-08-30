@@ -17,11 +17,9 @@ const Movies = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (query) {
-      serchByName(query).then(movies => {
-        setMovies(movies.results);
-      });
-    }
+    serchByName(query).then(movies => {
+      setMovies(movies.results);
+    });
   }, []);
   const onInputChange = value => {
     setSerchParams(value !== '' ? { query: value } : {});
