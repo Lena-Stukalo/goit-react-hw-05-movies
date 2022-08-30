@@ -18,14 +18,11 @@ const Movies = () => {
 
   useEffect(() => {
     if (query) {
-      serchByName(query).then(
-        movies => {
-          setMovies(movies.results);
-        },
-        [query]
-      );
+      serchByName(query).then(movies => {
+        setMovies(movies.results);
+      });
     }
-  }, []);
+  }, [query]);
   const onInputChange = value => {
     setSerchParams(value !== '' ? { query: value } : {});
   };
