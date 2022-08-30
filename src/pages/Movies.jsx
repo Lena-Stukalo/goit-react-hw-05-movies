@@ -18,9 +18,12 @@ const Movies = () => {
 
   useEffect(() => {
     if (query) {
-      serchByName(query).then(movies => {
-        setMovies(movies.results);
-      });
+      serchByName(query).then(
+        movies => {
+          setMovies(movies.results);
+        },
+        [query]
+      );
     }
   }, []);
   const onInputChange = value => {
