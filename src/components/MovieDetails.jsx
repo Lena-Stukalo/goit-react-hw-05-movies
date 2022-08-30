@@ -1,6 +1,19 @@
 import { useParams, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getByID } from 'services/APIwork';
+import styled from 'styled-components';
+const NavItem = styled(NavLink)`
+  display: block;
+  padding: 5px;
+  font-size: 14px;
+  background-color: #f7a372;
+  width:100px;
+  text-align: center;
+  color:#fff;
+  text-decoration: none;
+
+  }
+`;
 
 const MovieDetails = () => {
   const { movieID } = useParams();
@@ -16,7 +29,7 @@ const MovieDetails = () => {
   const goBack = location.state?.from ?? '/';
   return (
     <div>
-      <NavLink to={goBack}> Go back</NavLink>
+      <NavItem to={goBack}> Go back</NavItem>
       <img
         src={`https://image.tmdb.org/t/p/original/${poster_path}`}
         alt=""

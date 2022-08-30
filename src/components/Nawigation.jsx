@@ -3,13 +3,12 @@ import styled from 'styled-components';
 const NavItem = styled(NavLink)`
   display: block;
   padding: 10px;
-  font-size: 500;
   font-size: 16px;
   color: black;
   text-decoration: none;
 
   &.active {
-    background-color: rgb(64, 160, 216);
+    background-color: #f7a372;
     color: #fff;
   }
 `;
